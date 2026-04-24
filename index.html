@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cek Kelayakan</title>
+
+<style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #f0f2f5;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.container {
+  width: 95%;
+  max-width: 420px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  text-align: center;
+}
+h1 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+p {
+  font-size: 14px;
+  color: #666;
+}
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+button:hover {
+  transform: scale(1.02);
+}
+.hidden { display: none; }
+
+.progress {
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+.bar {
+  height: 100%;
+  width: 0%;
+  background: #2563eb;
+  border-radius: 10px;
+  transition: 0.4s;
+}
+
+.badge {
+  font-size: 12px;
+  color: #16a34a;
+  margin-bottom: 10px;
+}
+
+.loader {
+  margin-top: 20px;
+}
+
+.dot {
+  height: 8px;
+  width: 8px;
+  background: #2563eb;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 3px;
+  animation: bounce 1.2s infinite;
+}
+.dot:nth-child(2) { animation-delay: 0.2s; }
+.dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+
+.small {
+  font-size: 12px;
+  color: #999;
+  margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="progress"><div class="bar" id="bar"></div></div>
+
+<!-- STEP 1 -->
+<div id="s1">
+  <div class="badge">✔ Pemeriksaan wilayah aktif</div>
+  <h1>Cek apakah kamu memenuhi syarat</h1>
+  <p>Proses hanya 30 detik</p>
+  <button onclick="next()">Mulai</button>
+</div>
+
+<!-- STEP 2 -->
+<div id="s2" class="hidden">
+  <h1>Berapa usia kamu?</h1>
+  <button onclick="next()">18–25</button>
+  <button onclick="next()">25–40</button>
+  <button onclick="next()">40+</button>
+</div>
+
+<!-- STEP 3 -->
+<div id="s3" class="hidden">
+  <h1>Perangkat kamu?</h1>
+  <button onclick="next()">Android</button>
+  <button onclick="next()">iPhone</button>
+</div>
+
+<!-- STEP 4 -->
+<div id="s4" class="hidden">
+  <h1>Seberapa sering coba aplikasi baru?</h1>
+  <button onclick="next()">Jarang</button>
+  <button onclick="next()">Kadang</button>
+  <button onclick="next()">Sering</button>
+</div>
+
+<!-- LOADING -->
+<div id="loading" class="hidden">
+  <h1>Memeriksa data...</h1>
+  <div class="loader">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+  <p class="small">Mencocokkan dengan database regional</p>
+</div>
+
+<!-- RESULT -->
+<div id="result" class="hidden">
+  <h1>Kamu memenuhi syarat 🎉</h1>
+  <p>Beberapa slot masih tersedia hari ini</p>
+  <button onclick="go()">Lanjutkan</button>
+  <div class="small">*Ketersediaan dapat berubah sewaktu-waktu</div>
+</div>
+
+</div>
+
+<script>
+let step = 1;
+
+function next() {
+  document.getElementById("s" + step).classList.add("hidden");
+  step++;
+
+  if (step <= 4) {
+    document.getElementById("s" + step).classList.remove("hidden");
+    update();
+  } else {
+    showLoading();
+  }
+}
+
+function update() {
+  document.getElementById("bar").style.width = ((step-1) * 25) + "%";
+}
+
+function showLoading() {
+  document.getElementById("loading").classList.remove("hidden");
+  update();
+
+  setTimeout(() => {
+    document.getElementById("loading").classList.add("hidden");
+    document.getElementById("result").classList.remove("hidden");
+    document.getElementById("bar").style.width = "100%";
+  }, 2500 + Math.random() * 1500); // delay random biar natural
+}
+
+function go() {
+  window.location.href = "https://www.whencominghome.wiki/click?offer_id=34517&pub_id=264194&pub_click_id=KING&site=OFFER_CPL_34517&pub_sub_id=KING"; // GANTI LINK
+}
+</script>
+
+</body>
+</html>
