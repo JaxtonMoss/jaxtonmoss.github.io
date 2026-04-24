@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cek Kelayakan</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      width: 90%;
+      max-width: 400px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 14px;
+      color: #555;
+    }
+    button {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #4CAF50;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    .hidden {
+      display: none;
+    }
+    .progress {
+      height: 6px;
+      background: #ddd;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: #4CAF50;
+      transition: 0.3s;
+    }
+    .loader {
+      margin: 20px 0;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="progress"><div class="progress-bar" id="progress"></div></div>
+
+  <!-- STEP 1 -->
+  <div id="step1">
+    <h1>Cek apakah kamu memenuhi syarat</h1>
+    <p>Hanya butuh 30 detik</p>
+    <button onclick="nextStep()">Mulai Sekarang</button>
+  </div>
+
+  <!-- STEP 2 -->
+  <div id="step2" class="hidden">
+    <h1>Berapa usia kamu?</h1>
+    <button onclick="nextStep()">18-25</button>
+    <button onclick="nextStep()">25-40</button>
+    <button onclick="nextStep()">40+</button>
+  </div>
+
+  <!-- STEP 3 -->
+  <div id="step3" class="hidden">
+    <h1>Perangkat yang kamu gunakan?</h1>
+    <button onclick="nextStep()">Android</button>
+    <button onclick="nextStep()">iPhone</button>
+  </div>
+
+  <!-- STEP 4 -->
+  <div id="step4" class="hidden">
+    <h1>Seberapa sering mencoba aplikasi baru?</h1>
+    <button onclick="nextStep()">Jarang</button>
+    <button onclick="nextStep()">Kadang</button>
+    <button onclick="nextStep()">Sering</button>
+  </div>
+
+  <!-- LOADING -->
+  <div id="loading" class="hidden">
+    <h1>Memeriksa...</h1>
+    <div class="loader">Mohon tunggu sebentar</div>
+  </div>
+
+  <!-- RESULT -->
+  <div id="result" class="hidden">
+    <h1>Kamu memenuhi syarat 🎉</h1>
+    <p>Slot terbatas tersedia hari ini</p>
+    <button onclick="redirect()">Lanjutkan</button>
+  </div>
+
+</div>
+
+<script>
+let step = 1;
+
+function nextStep() {
+  document.getElementById("step" + step).classList.add("hidden");
+  step++;
+  
+  if (step <= 4) {
+    document.getElementById("step" + step).classList.remove("hidden");
+    updateProgress();
+  } else {
+    showLoading();
+  }
+}
+
+function updateProgress() {
+  let progress = (step - 1) * 25;
+  document.getElementById("progress").style.width = progress + "%";
+}
+
+function showLoading() {
+  document.getElementById("loading").classList.remove("hidden");
+  updateProgress();
+
+  setTimeout(() => {
+    document.getElementById("loading").classList.add("hidden");
+    document.getElementById("result").classList.remove("hidden");
+    document.getElementById("progress").style.width = "100%";
+  }, 3000);
+}
+
+function redirect() {
+  // GANTI DENGAN SMARTLINK KAMU
+  window.location.href = "https://www.whencominghome.wiki/click?offer_id=34517&pub_id=264194&pub_click_id=KING&site=OFFER_CPL_34517&pub_sub_id=KING";
+}
+</script>
+
+</body>
+</html>
